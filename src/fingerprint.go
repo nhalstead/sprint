@@ -29,6 +29,7 @@ func getFingerprint(s string) string {
 	urlData, _ := url.Parse(s)
 	reqURL := urlData.Host
 
+	// This will handle if the client does not have the url and its just the domain name.
 	if reqURL == "" {
 		reqURL = s
 	}
