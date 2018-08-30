@@ -35,7 +35,7 @@ func getFingerprint(s string) string {
 	}
 
 	req, _ := http.NewRequest("HEAD", "https://"+reqURL, bytes.NewBufferString(""))
-	req.Header.Set("User-Agent", "GoFingerprint/0.1.5")
+	req.Header.Set("User-Agent", "GoFingerprint/1.0.1")
 
 	resp, _ := http.DefaultClient.Do(req)
 
