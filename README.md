@@ -34,7 +34,7 @@ If you want SHA1 and SHA512 in one request you can combine it into one request
 > 2B:AE:50:AF:6A:71:43:08:F1:98:A8:23:8A:1E:3A:1A:D2:19:F3:2B,E8:28: ... :47:4F:5B
 
 To remove the `:` characters from the hash output you can add the flag of `-disableNth` and it will not insert them.
-> go run src/fingerprint.go google.com -sha1
+> go run src/fingerprint.go google.com -sha1 -disableNth
 >
 > 2BAE50AF6A714308F198A8238A1E3A1AD219F32B
 
