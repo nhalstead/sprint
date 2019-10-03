@@ -2,7 +2,7 @@ package main
 
 /**
  * This can Connect to a given domain and Get the SSL Cert's fingerprint.
- * Low Dependicies
+ * Low Dependencies
  * Good for Automation and making fingerprints on the fly.
  *
  * @author Noah Halstead <nhalstaed00@gmail.com>
