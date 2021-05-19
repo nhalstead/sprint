@@ -1,4 +1,4 @@
-module github.com/nhalstead/ssl-fingerprint
+module github.com/nhalstead/sprint
 
 go 1.14
 

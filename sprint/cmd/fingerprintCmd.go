@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/nhalstead/ssl-fingerprint/pkg"
+	"github.com/nhalstead/sprint"
 	"github.com/spf13/cobra"
 )
 
@@ -30,7 +30,7 @@ var (
 
 			// If the URL is HTTP, Do not process it as it does NOT have SSL Cert we are looking for.
 			if !strings.HasPrefix(host, "http://") {
-				crt, err := sslfingerprint.GetFingerprint(host, disableNth)
+				crt, err := sprint.GetFingerprint(host, disableNth)
 
 				if err != nil {
 					fmt.Println(err)

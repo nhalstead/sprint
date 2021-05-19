@@ -1,4 +1,4 @@
-package sslfingerprint
+package sprint
 
 import (
 	"bytes"

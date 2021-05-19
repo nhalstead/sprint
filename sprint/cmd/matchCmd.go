@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/nhalstead/ssl-fingerprint/pkg"
+	"github.com/nhalstead/sprint"
 	"github.com/spf13/cobra"
 )
 
@@ -17,7 +17,7 @@ var (
 			domainURL := args[0]
 			fingerprint := args[1]
 
-			crt, err := sslfingerprint.GetFingerprint(domainURL, false)
+			crt, err := sprint.GetFingerprint(domainURL, false)
 
 			if err != nil {
 				fmt.Println(err)

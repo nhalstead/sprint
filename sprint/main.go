@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/nhalstead/ssl-fingerprint/cmd"
+	"github.com/nhalstead/sprint/sprint/cmd"
 )
 
 func main() {
