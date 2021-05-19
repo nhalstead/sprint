@@ -1,44 +1,92 @@
-# SSL Fingerprint
+# SSL Fingerprint (sprint)
 
-This cli application written in go will connect to the given domain and return the `sha1`/`sha256`/`sha512` fingerprint formatted appropriately.
+This cli application written in go will connect to the given domain and return the `md5`/`sha1`/`sha256`/`sha512` fingerprint formatted appropriately.
 
 Simple, Fast, Easy
 
 ### Why?
-> You can use this package in some automation tasks like cert
->  pinning, Saving the cert pin to a config file.
->  
-> Verifying Clients you are connecting to in `cURL`.
+
+The main purpose of this was for debugging of SSL certs but this package can be used in some automation tasks like cert pinning or validation.
+
+This is a CLI tool and a package.
+
+### How to use the Package
+
+Add the following line to import the package and start using it!
+
+```go
+package main
+
+import (
+	"fmt"
+	// Needed to be imported to work
+	"github.com/nhalstead/ssl-fingerprint/pkg"
+)
+
+func main() {
+	test, _ := sslfingerprint.GetFingerprint("google.com", false)
+
+	fmt.Println("Sha256 Fingerprint of google.com: ", test.SHA256)
+}
+```
+
+### How to use the CLI
+
+> sprint host \[domain\] -1
+
+To use SHA256 or SHA512 simply use the `-2` (or `--sha-256`) and `-5` (or `--sha-256`) flag.
+
+> sprint host \[domain\] -2
+> sprint host \[domain\] -5
+
+#### Example Usage
+
+> sprint host google.com -1
 >
->  If you have the will power to integrate this,
->  you can do cert pinning by fingerprinting
->  with this by using an if Statement.
+> F0\:48\:7A\:59\:65\:34\:33\:F8\:A1\:92\:C6\:C4\:FB\:9A\:CC\:C5\:AD\:0C\:B3\:E2
 
-### How to use:
-> go run src/fingerprint.go -domain [domain] -sha1
+#### Advanced Usage
 
-To use SHA256 or SHA512 simply use the `-sha256` and `-sha512` flag.
-> go run src/fingerprint.go -domain [domain] -sha256
+If in use for bash scripts you can use `sprint match`. Sprint Match will fetch the fingerprint and return a status using the exit codes.
 
-> go run src/fingerprint.go -domain [domain] -sha512
+A Non-zero exit code means that it has failed the check or failed to connect during the process.
 
-### Example Usage
-> go run src/fingerprint.go google.com -sha1
->
-> 2B:AE:50:AF:6A:71:43:08:F1:98:A8:23:8A:1E:3A:1A:D2:19:F3:2B
+This makes it simple to implement a method of cert pinning without the need to use other languages with extra libraries.
 
-### Advanced Usage and Extras
-If you want SHA1 and SHA512 in one request you can combine it into one request
-> go run src/fingerprint.go -domain google.com -sha1 -sha512
->
-> 2B:AE:50:AF:6A:71:43:08:F1:98:A8:23:8A:1E:3A:1A:D2:19:F3:2B,E8:28: ... :47:4F:5B
+#### Help (-f / --help)
 
-To remove the `:` characters from the hash output you can add the flag of `-disableNth` and it will not insert them.
-> go run src/fingerprint.go google.com -sha1 -disableNth
->
-> 2BAE50AF6A714308F198A8238A1E3A1AD219F32B
+```
+Usage:
+  sprint [command]
 
-**NOTE: If no domain is defined using the Flag, It uses `localhost` as the domain.**
+Available Commands:
+  completion  generate the autocompletion script for the specified shell
+  help        Help about any command
+  host        Get ssl fingerprint of a URL
+  match       Get ssl fingerprint of a URL and check if it matches the given fqdn or ip
 
-# Contributors
-- nhalstead @ https://github.com/nhalstead
+Flags:
+  -h, --help   help for sprint
+```
+
+```
+Usage:
+  sprint host [fqdn or ip] [flags]
+
+Flags:
+  -d, --disable-nth        disable Nth separator
+  -h, --help               help for host
+  -m, --md5                return md5 fingerprint
+  -s, --separator string   separator between many hashes (default ",")
+  -1, --sha-1              return sha1 fingerprint
+  -2, --sha-256            return sha256 fingerprint
+  -5, --sha-512            return sha512 fingerprint
+```
+
+```
+Usage:
+  sprint match [fqdn or ip] [fingerprint] [flags]
+
+Flags:
+  -h, --help   help for match
+```
