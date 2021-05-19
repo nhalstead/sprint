@@ -10,12 +10,12 @@ import (
 )
 
 var (
-	useMd5 bool
-	useSha1 bool
-	useSha256 bool
-	useSha512 bool
+	useMd5     bool
+	useSha1    bool
+	useSha256  bool
+	useSha512  bool
 	disableNth bool
-	separator string
+	separator  string
 
 	fingerprintCmd = &cobra.Command{
 		Use:   "host [fqdn or ip]",

@@ -6,7 +6,7 @@ import (
 
 var (
 	rootCmd = &cobra.Command{
-		Use:   "sprint",
+		Use:  "sprint",
 		Long: "Get a certificate fingerprint from a FQDN or URL.",
 	}
 )

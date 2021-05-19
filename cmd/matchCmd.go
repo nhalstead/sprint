@@ -26,9 +26,9 @@ var (
 			}
 
 			// Create a new slice with set a defined size of 12 (4 fingerprint types, 3 formats)
-			certFingerprints := make([]string, 4 * 3)
+			certFingerprints := make([]string, 4*3)
 
-			certFingerprints = append(certFingerprints,	crt.MD5)
+			certFingerprints = append(certFingerprints, crt.MD5)
 			certFingerprints = append(certFingerprints, crt.SHA1)
 			certFingerprints = append(certFingerprints, crt.SHA256)
 			certFingerprints = append(certFingerprints, crt.SHA512)

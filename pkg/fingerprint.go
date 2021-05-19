@@ -15,11 +15,11 @@ import (
 )
 
 type Fingerprints struct {
-	MD5 string
-	SHA1 string
-	SHA256 string
-	SHA512 string
-	Issuer pkix.Name
+	MD5         string
+	SHA1        string
+	SHA256      string
+	SHA512      string
+	Issuer      pkix.Name
 	CommonNames []string
 }
 
@@ -36,7 +36,7 @@ func GetFingerprint(s string, disableNth bool) (*Fingerprints, error) {
 		requestedHost = s
 	}
 
-	req, _ := http.NewRequest("HEAD", "https://" + requestedHost, bytes.NewBufferString(""))
+	req, _ := http.NewRequest("HEAD", "https://"+requestedHost, bytes.NewBufferString(""))
 	req.Header.Set("User-Agent", "GoFingerprint/2.0")
 
 	resp, err := http.DefaultClient.Do(req)
