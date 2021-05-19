@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"unicode/utf8"
 
 	"github.com/nhalstead/sprint"
 	"github.com/spf13/cobra"
@@ -33,6 +34,8 @@ var (
 				useSha1 = true
 			}
 
+			runeSeparator := getDelimiterFromString(separator)
+
 			// If the URL is HTTP, Do not process it as it does NOT have SSL Cert we are looking for.
 			if !strings.HasPrefix(host, "http://") {
 				crt, err := sprint.GetFingerprint(host, disableNth)
@@ -55,7 +58,7 @@ var (
 				// SHA1 Hash Export
 				if useSha1 == true {
 					if alreadyExportedOnce == true {
-						fmt.Printf("%+v", separator)
+						fmt.Printf("%c", runeSeparator)
 					}
 					alreadyExportedOnce = true
 					fmt.Print(crt.SHA1) // SHA1 Hash
@@ -64,7 +67,7 @@ var (
 				// SHA256 Hash Export
 				if useSha256 == true {
 					if alreadyExportedOnce == true {
-						fmt.Printf("%+v", separator)
+						fmt.Printf("%c", runeSeparator)
 					}
 					alreadyExportedOnce = true
 					fmt.Print(crt.SHA256) // SHA256 Hash
@@ -73,7 +76,7 @@ var (
 				// SHA512 Hash Export
 				if useSha512 == true {
 					if alreadyExportedOnce == true {
-						fmt.Printf("%+v", separator)
+						fmt.Printf("%c", runeSeparator)
 					}
 					fmt.Print(crt.SHA512) // SHA512 Hash
 				}
@@ -85,6 +88,22 @@ var (
 		},
 	}
 )
+
+// getDelimiterFromString Modified from gocsv project
+// https://github.com/aotimme/gocsv/blob/ebfb0c7dac7e9bce320a548aa158fd5b1cc9c1c7/cmd/utils.go#L21
+func getDelimiterFromString(delimiter string) rune {
+	if delimiter == "\\t" {
+		return '\t'
+	} else if delimiter == "\\n" {
+		return '\n'
+	}  else if delimiter == "\\r" {
+		return '\r'
+	} else if len(delimiter) > 0 {
+		delimiterRune, _ := utf8.DecodeRuneInString(delimiter)
+		return delimiterRune
+	}
+	return rune(0)
+}
 
 func init() {
 	fingerprintCmd.Flags().BoolVarP(&useMd5, "md5", "m", false, "return md5 fingerprint")
