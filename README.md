@@ -38,9 +38,10 @@ func main() {
 
 > sprint host \[domain\] -1
 
-To use SHA256 or SHA512 simply use the `-2` (or `--sha-256`) and `-5` (or `--sha-256`) flag.
+To use SHA256 or SHA512 simply use the `-2` (or `--sha-256`) and `-5` (or `--sha-512`) flags respectively.
 
 > sprint host \[domain\] -2
+>
 > sprint host \[domain\] -5
 
 #### Example Usage
@@ -57,7 +58,7 @@ A Non-zero exit code means that it has failed the check or failed to connect dur
 
 This makes it simple to implement a method of cert pinning without the need to use other languages with extra libraries.
 
-#### Help (-f / --help)
+#### Help (-h / --help)
 
 ```
 Usage:
