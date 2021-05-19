@@ -2,6 +2,7 @@
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/nhalstead/ssl-fingerprint)](https://goreportcard.com/report/github.com/nhalstead/ssl-fingerprint)
 [![GoDoc](https://godoc.org/github.com/nhalstead/ssl-fingerprint?status.svg)](https://godoc.org/github.com/nhalstead/ssl-fingerprint)
+[![MIT license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 
 This cli application written in go will connect to the given domain and return the `md5`/`sha1`/`sha256`/`sha512` fingerprint formatted appropriately.
 
