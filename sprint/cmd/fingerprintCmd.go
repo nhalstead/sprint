@@ -21,6 +21,11 @@ var (
 		Use:   "host [fqdn or ip]",
 		Short: "Get ssl fingerprint of a URL",
 		Run: func(cmd *cobra.Command, args []string) {
+			if len(args) == 0 {
+				cmd.Help()
+				os.Exit(1)
+			}
+
 			host := args[0]
 
 			// Default to show SHA 1 if no modes are selected

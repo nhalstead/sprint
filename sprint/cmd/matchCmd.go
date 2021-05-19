@@ -14,6 +14,11 @@ var (
 		Use:   "match [fqdn or ip] [fingerprint]",
 		Short: "Get ssl fingerprint of a URL and check if it matches the given fqdn or ip",
 		Run: func(cmd *cobra.Command, args []string) {
+			if len(args) == 0 {
+				cmd.Help()
+				os.Exit(1)
+			}
+
 			domainURL := args[0]
 			fingerprint := args[1]
 
